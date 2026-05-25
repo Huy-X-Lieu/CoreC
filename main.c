@@ -1,7 +1,8 @@
 #include <stdio.h>
-#include "RemoveACharFromString/RemoveACharFromString.h"
+#include "SplitOnce/split_once.h"
+
 
 int main(void) {
-    test_remove_char();
+    test_split_once();
     return 0;
 }
