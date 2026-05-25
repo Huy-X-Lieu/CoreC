@@ -4,6 +4,12 @@
 #include <stdio.h>
 #include <string.h>
 
+void swap_chars(char *char_1, char *char_2) {
+    char temp = *char_1;
+    *char_1 = *char_2;
+    *char_2 = temp;
+}
+
 void remove_char(char *s, char target) {
     if (s == NULL || *s == '\0')
         return;
@@ -12,19 +18,20 @@ void remove_char(char *s, char target) {
         return;
 
     char *p_str = s;
-    int skipChars = 1;
+    char *p_non_target = NULL;
     while (*p_str != '\0') {
         if (*p_str == target) {
-            while (*(p_str + skipChars) == target)
-                skipChars++;
-            if (*(p_str +skipChars) == '\0') {
-                *p_str = '\0';
-                return;
+            p_non_target = p_str + 1;
+            while (*p_non_target == target) {
+                p_non_target++;
             }
-            *p_str = *(p_str + skipChars);
-            *(p_str + skipChars) = target;
+            swap_chars(p_str, p_non_target);
         }
-        p_str ++;
+
+        if (*p_str == '\0')
+            return;
+
+        p_str++;
     }
 }
 
