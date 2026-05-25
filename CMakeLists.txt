@@ -7,4 +7,6 @@ add_executable(CoreC main.c
         RemoveACharFromString/RemoveACharFromString.h
         RemoveACharFromString/RemoveACharFromString.c
         SplitOnce/split_once.h
-        SplitOnce/split_once.c)
+        SplitOnce/split_once.c
+        find_word/find_word.h
+        find_word/find_word.c)
