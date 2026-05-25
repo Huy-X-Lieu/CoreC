@@ -4,35 +4,21 @@
 #include <stdio.h>
 #include <string.h>
 
-void swap_chars(char *char_1, char *char_2) {
-    char temp = *char_1;
-    *char_1 = *char_2;
-    *char_2 = temp;
-}
-
 void remove_char(char *s, char target) {
-    if (s == NULL || *s == '\0')
+    if (s == NULL)
         return;
 
-    if (target == '\0')
-        return;
+    char *read = s;
+    char *write = s;
 
-    char *p_str = s;
-    char *p_non_target = NULL;
-    while (*p_str != '\0') {
-        if (*p_str == target) {
-            p_non_target = p_str + 1;
-            while (*p_non_target == target) {
-                p_non_target++;
-            }
-            swap_chars(p_str, p_non_target);
+    while (*read != '\0') {
+        if (*read != target) {
+            *write = *read;
+            write++;
         }
-
-        if (*p_str == '\0')
-            return;
-
-        p_str++;
+        read++;
     }
+    *write = '\0';
 }
 
 void test_remove_char(void) {
