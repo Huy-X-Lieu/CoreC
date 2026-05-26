@@ -11,23 +11,26 @@ size_t split_words(char *s, char **words, size_t capacity) {
         return 0;
 
     char *current = s;
-    int count = 0;
-    while (*current == ' ') {
-        current++;
-    }
-    if (*current == '\0')
-        return 0;
+    size_t count = 0;
 
     while (*current != '\0' && capacity > count) {
-        // get the first letter of the word
+        // check if current hits the end
         while (*current == ' ')
             current++;
+        if (*current == '\0')
+            break;
+
+        // get the first letter of the word
         *words = current;
 
         // get the last letter of the word and replace the space at the end
         // with '\0'
         while (*current != '\0' && *current != ' ') {
             current++;
+        }
+        if (*current == '\0') {
+            count++;
+            break;
         }
         *current = '\0';
 
@@ -76,6 +79,38 @@ void test_split_words(void) {
     assert(f_count == 2);
     assert(strcmp(f_words[0], "a") == 0);
     assert(strcmp(f_words[1], "b") == 0);
+
+    char g[] = "hello";
+    char *g_words[3];
+    size_t g_count = split_words(g, g_words, 3);
+    assert(g_count == 1);
+    assert(strcmp(g_words[0], "hello") == 0);
+
+    char h[] = "hello   ";
+    char *h_words[3];
+    size_t h_count = split_words(h, h_words, 3);
+    assert(h_count == 1);
+    assert(strcmp(h_words[0], "hello") == 0);
+
+    char i[] = "hello   world   ";
+    char *i_words[4];
+    size_t i_count = split_words(i, i_words, 4);
+    assert(i_count == 2);
+    assert(strcmp(i_words[0], "hello") == 0);
+    assert(strcmp(i_words[1], "world") == 0);
+
+    char j[] = "a b";
+    char *j_words[2];
+    size_t j_count = split_words(j, j_words, 0);
+    assert(j_count == 0);
+
+    char k[] = "hello";
+    size_t k_count = split_words(k, NULL, 1);
+    assert(k_count == 0);
+
+    char *l_words[2];
+    size_t l_count = split_words(NULL, l_words, 2);
+    assert(l_count == 0);
 
     printf("Passed all split_words test cases.\n");
 }
