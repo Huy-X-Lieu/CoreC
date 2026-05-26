@@ -9,4 +9,8 @@ add_executable(CoreC main.c
         SplitOnce/split_once.h
         SplitOnce/split_once.c
         find_word/find_word.h
-        find_word/find_word.c)
+        find_word/find_word.c
+        trim_left/trim_left.h
+        trim_left/trim_left.c
+        split_word/split_word.h
+        split_word/split_word.c)
